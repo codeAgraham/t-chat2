@@ -11,6 +11,58 @@
 	let autoscroll: boolean;
 	let div: HTMLElement;
 
+	$: {
+		allMessages = data?.messages || [];
+	}
+
+	async function mapPayloadToMessage(payload: any): Promise<Message> {
+		const senderId = payload.new.sender_id;
+
+		let { data: sender_info, error } = await data.supabase
+			.from('user_info')
+			.select('id, username, avatar_url')
+			.eq('id', senderId);
+
+		if (error || !sender_info || sender_info.length === 0) {
+			throw new Error("Couldn't fetch sender details");
+		}
+
+		const senderDetails = sender_info[0];
+
+		return {
+			id: payload.new.id,
+			message_text: payload.new.message_text,
+			created_at: payload.new.created_at,
+			sender_id: {
+				id: senderDetails.id,
+				username: senderDetails.username,
+				avatar_url: senderDetails.avatar_url
+			}
+		};
+	}
+
+	const messages = data.supabase
+		.channel('custom-insert-channel')
+		.on(
+			'postgres_changes',
+			{ event: 'INSERT', schema: 'public', table: 'messages' },
+			async (payload) => {
+				if (import.meta.env.DEV) {
+					console.log('Change received!', payload);
+				}
+				if (payload.new.sender_id === data?.session?.user.id) {
+					return;
+				}
+				try {
+					const newMessage = await mapPayloadToMessage(payload);
+					allMessages = [...allMessages, newMessage];
+				} catch (error) {
+					console.error('Error mapping payload to message:', error);
+				}
+			}
+		)
+		.subscribe();
+
 	beforeUpdate(() => {
 		autoscroll = div && div.offsetHeight + div.scrollTop > div.scrollHeight - 20;
 	});
@@ -18,10 +70,6 @@
 	afterUpdate(() => {
 		if (autoscroll) div.scrollTo(0, div.scrollHeight);
 	});
-
-	$: {
-		allMessages = data?.messages || [];
-	}
 
 	onMount(() => {
 		div.scrollTo(0, div.scrollHeight);
