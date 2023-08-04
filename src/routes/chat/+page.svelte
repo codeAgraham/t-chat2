@@ -108,11 +108,10 @@
 </script>
 
 <div
-	class="flex flex-col h-[calc(100%-theme(space.32))] w-full lg:w-4/5 mx-auto mt-2 p-4 bg-surface-50-900-token"
+	class="flex flex-col h-[calc(100%-theme(space.36))] md:h-[calc(100%-theme(space.8))] w-full lg:w-4/5 mx-auto mt-2 p-4 bg-surface-50-900-token"
 >
 	<div
 		class="overflow-auto flex-grow flex flex-col justify-start mb-0 hide-scrollbar"
-		style="height: calc(100vh - 60px);"
 		bind:this={div}
 	>
 		<!-- Your message rendering logic -->
