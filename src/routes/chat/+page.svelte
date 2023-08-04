@@ -108,12 +108,14 @@
 </script>
 
 <div
-	class="flex flex-col h-[calc(100%-theme(space.48))] w-full lg:w-4/5 mx-auto mt-2 card p-4 bg-surface-50-900-token"
+	class="flex flex-col h-[calc(100%-theme(space.32))] w-full lg:w-4/5 mx-auto mt-2 p-4 bg-surface-50-900-token"
 >
 	<div
-		class="overflow-auto px-4 flex-grow flex flex-col justify-start space-y-4 hide-scrollbar h-screen"
+		class="overflow-auto flex-grow flex flex-col justify-start mb-0 hide-scrollbar"
+		style="height: calc(100vh - 60px);"
 		bind:this={div}
 	>
+		<!-- Your message rendering logic -->
 		{#each allMessages as message}
 			{#if message.sender_id.id == data?.session?.user.id}
 				<div class="flex gap-2 justify-end items-start">
