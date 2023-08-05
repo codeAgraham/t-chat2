@@ -108,7 +108,7 @@
 </script>
 
 <div
-	class="flex flex-col h-[calc(100%-theme(space.20))] md:h-[calc(100%-theme(space.8))] w-full lg:w-4/5 mx-auto mt-2 p-4 bg-surface-50-900-token overflow-auto"
+	class="flex flex-col h-[calc(100%-theme(space.10))] md:h-[calc(100%-theme(space.8))] w-full lg:w-4/5 mx-auto mt-2 p-4 bg-surface-50-900-token overflow-auto"
 >
 	<div
 		class="overflow-y-auto flex-grow flex flex-col justify-start space-y-4 hide-scrollbar max-h-[calc(100vh-200px)]"
