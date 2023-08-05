@@ -12,7 +12,7 @@
 <div class="flex flex-col mx-auto justify-start items-center h-full">
 	<div class="flex justify-center items-center pt-8">
 		<h1 class="text-7xl">💩</h1>
-		<SpeechBubble>Welcome!</SpeechBubble>
+		<SpeechBubble>Welcome to turd chat!</SpeechBubble>
 	</div>
 	<div class="w-3/4 lg:w-2/5 pt-4">
 		<div class="card p-8 variant-ghost-surface">
