@@ -11,7 +11,7 @@ export const POST: RequestHandler = async ({ locals, request }) => {
 	});
 
 	if (err) {
-		throw error(500, 'Something went wrong logging you in.');
+		throw error(401, 'Your login attempt failed.  Either your username or password are incorrect.');
 	}
 
 	throw redirect(303, '/profile');

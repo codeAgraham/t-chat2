@@ -47,6 +47,10 @@ export const actions = {
 		const message = formData.prompt as string;
 		const user = formData.sender_id as string;
 
+		if (message == '') {
+			return;
+		}
+
 		const { data, error } = await locals.supabase
 			.from('messages')
 			.insert([
